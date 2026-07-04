@@ -19,7 +19,7 @@ This is an automated lead qualification system built in n8n. It ingests form sub
 ## Project Structure
 
 ```
-lead-qualification-ai/
+ai-lead-generation/
 ├── design/v1/              # Multi-page HTML design (Bootstrap)
 │   ├── index.html          # Home page
 │   ├── pages/

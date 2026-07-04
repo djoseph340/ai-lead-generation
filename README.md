@@ -16,7 +16,7 @@
 
 ## 📖 View Documentation
 
-**GitHub Pages:** https://djoseph340.github.io/lead-qualification-ai/
+**GitHub Pages:** https://djoseph340.github.io/ai-lead-generation/
 
 Access the interactive documentation for all three versions online.
 
@@ -70,7 +70,7 @@ Access the interactive documentation for all three versions online.
 ## Project Structure
 
 ```
-lead-qualification-ai/
+ai-lead-generation/
 ├── docs/                          # Documentation websites
 │   ├── index.html                # Main landing page (all versions)
 │   ├── v1/                        # v1.0 documentation
@@ -149,7 +149,7 @@ Each version requires different setup:
 
 **View the complete documentation on GitHub Pages:**
 
-🔗 **[djoseph340.github.io/lead-qualification-ai](https://djoseph340.github.io/lead-qualification-ai/)**
+🔗 **[djoseph340.github.io/ai-lead-generation](https://djoseph340.github.io/ai-lead-generation/)**
 
 The GitHub Pages site includes:
 - Interactive documentation for all 3 versions
@@ -163,6 +163,6 @@ The GitHub Pages site includes:
 ## Contact
 
 **Product Manager:** Dhanya Joseph  
-**Repository:** [djoseph340/lead-qualification-ai](https://github.com/djoseph340/lead-qualification-ai)  
+**Repository:** [djoseph340/ai-lead-generation](https://github.com/djoseph340/ai-lead-generation)  
 **Status:** Production Ready ✅  
 **Last Updated:** 2026-07-04
