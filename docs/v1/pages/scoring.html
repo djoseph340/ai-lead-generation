@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scoring Logic - Lead Qualification Design</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { background-color: #f8f9fa; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    .card { border: none; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+    .score-table { font-size: 14px; }
+    .priority-badge { display: inline-block; padding: 4px 12px; border-radius: 4px; font-weight: 500; }
+    .priority-high { background: #ff6b6b; color: white; }
+    .priority-medium { background: #ffd43b; color: #333; }
+    .priority-low { background: #a8a8a8; color: white; }
+  </style>
+</head>
+<body>
+  <div id="menu-container"></div>
+
+  <div class="container-lg py-5">
+    <h1 class="mb-4">Scoring Logic</h1>
+
+    <div class="row g-4">
+      <div class="col-lg-8">
+        <h2 class="h5 mb-3">How Scoring Works</h2>
+        <p>Each lead starts at 0 points. Points are added based on signals in the form submission. The total determines where the lead goes and how it's classified.</p>
+
+        <hr class="my-4">
+
+        <h2 class="h5 mb-3">Scoring Rules (v1.0)</h2>
+
+        <table class="table table-borderless score-table">
+          <thead>
+            <tr style="border-bottom: 2px solid #ddd;">
+              <th>Signal</th>
+              <th>Condition</th>
+              <th>Points</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Industry</strong></td>
+              <td>Healthcare</td>
+              <td><span style="color: #667eea; font-weight: bold;">+30</span></td>
+            </tr>
+            <tr>
+              <td><strong>Company Size</strong></td>
+              <td>200+ employees</td>
+              <td><span style="color: #667eea; font-weight: bold;">+25</span></td>
+            </tr>
+            <tr>
+              <td rowspan="2"><strong>Message Content</strong></td>
+              <td>Contains "AI"</td>
+              <td><span style="color: #667eea; font-weight: bold;">+20</span></td>
+            </tr>
+            <tr>
+              <td>Contains "Automation"</td>
+              <td><span style="color: #667eea; font-weight: bold;">+20</span></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p class="small text-muted mt-3">Note: A lead can accumulate points from multiple signals. For example, if a lead is from Healthcare AND has 200+ employees AND mentions "AI", the score is 30 + 25 + 20 = 75.</p>
+
+        <hr class="my-4">
+
+        <h2 class="h5 mb-3">Priority Assignment</h2>
+        <p>After scoring, leads are assigned a priority tier:</p>
+
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="card p-4">
+              <p style="margin-bottom: 10px;"><strong>High Priority</strong></p>
+              <p class="priority-badge priority-high">Score ≥ 80</p>
+              <p class="small text-muted mt-3">Leads that meet or exceed the qualification threshold. These go directly to the <strong>Leads</strong> sheet for sales.</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card p-4">
+              <p style="margin-bottom: 10px;"><strong>Medium Priority</strong></p>
+              <p class="priority-badge priority-medium">Score 50–79</p>
+              <p class="small text-muted mt-3">Warm leads that show some fit but didn't hit the threshold. Classified with tier and reasons on <strong>Unqualified</strong> sheet.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3 mt-2">
+          <div class="col-md-6">
+            <div class="card p-4">
+              <p style="margin-bottom: 10px;"><strong>Low Priority</strong></p>
+              <p class="priority-badge priority-low">Score < 50</p>
+              <p class="small text-muted mt-3">Poor fit. Minimal match with criteria. Stored for reference but unlikely to convert.</p>
+            </div>
+          </div>
+        </div>
+
+        <hr class="my-4">
+
+        <h2 class="h5 mb-3">Example Calculation</h2>
+        <div class="card p-4 bg-light">
+          <p><strong>Incoming Lead:</strong></p>
+          <ul style="margin-bottom: 0;">
+            <li>Name: Donald Smith</li>
+            <li>Company: Baylor Inc (250 employees)</li>
+            <li>Industry: Healthcare</li>
+            <li>Message: "Looking for AI-powered supply chain automation"</li>
+          </ul>
+          <hr>
+          <p><strong>Score Breakdown:</strong></p>
+          <ul style="margin-bottom: 0;">
+            <li>Healthcare industry: <span style="color: #667eea;">+30</span></li>
+            <li>250 employees (≥200): <span style="color: #667eea;">+25</span></li>
+            <li>Contains "AI": <span style="color: #667eea;">+20</span></li>
+            <li>Contains "Automation": <span style="color: #667eea;">+20</span></li>
+          </ul>
+          <hr>
+          <p style="margin-bottom: 0;"><strong>Total: 95 points → High Priority (≥80) → Qualified</strong></p>
+        </div>
+
+        <hr class="my-4">
+
+        <h2 class="h5 mb-3">Tuning Rules</h2>
+        <p>Rules live in the n8n Code node. To adjust:</p>
+        <ol>
+          <li>Edit the scoring rule (e.g., change Healthcare from +30 to +40)</li>
+          <li>Redeploy the workflow</li>
+          <li>New leads use updated rules immediately</li>
+        </ol>
+        <p class="small text-muted">No model retraining, no data science needed. This is the advantage of rule-based systems.</p>
+
+      </div>
+
+      <div class="col-lg-4">
+        <div class="card p-4 sticky-top" style="top: 20px;">
+          <h5 class="mb-3">Quick Reference</h5>
+          <div class="mb-3">
+            <small class="text-muted d-block">Qualified Threshold</small>
+            <strong>80 points</strong>
+          </div>
+          <div class="mb-3">
+            <small class="text-muted d-block">Max Possible Score (v1)</small>
+            <strong>95 points</strong>
+          </div>
+          <div class="mb-3">
+            <small class="text-muted d-block">Scoring Rules</small>
+            <strong>4 active rules</strong>
+          </div>
+          <hr>
+          <h6 class="mb-2">How to Read</h6>
+          <p class="small text-muted mb-0">Each rule checks for a condition and awards fixed points if true. There's no weighting or ML—just simple addition.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-light border-top py-4 mt-5">
+    <div class="container-lg">
+      <small class="text-muted">Design v1.0 | Last updated: 2026-07-04</small>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/menu.js"></script>
+  <script>renderMenu('scoring');</script>
+</body>
+</html>

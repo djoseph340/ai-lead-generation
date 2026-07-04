@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Overview - Lead Qualification Design</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { background-color: #f8f9fa; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    .card { border: none; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  </style>
+</head>
+<body>
+  <div id="menu-container"></div>
+
+  <div class="container-lg py-5">
+    <h1 class="mb-4">Overview</h1>
+
+    <div class="row g-4">
+      <div class="col-lg-8">
+        <h2 class="h5 mb-3">Purpose</h2>
+        <p>We built this system to handle lead intake at scale. Sales teams need qualified prospects, not a mountain of unfiltered form submissions.</p>
+        <p>This workflow reads inbound leads, applies a consistent scoring system, and automatically routes them to the right teams or buckets based on fit.</p>
+
+        <hr class="my-5">
+
+        <h2 class="h5 mb-3">Why Not Use ML?</h2>
+        <p>We chose rule-based scoring for three reasons:</p>
+        <ul>
+          <li><strong>Explainability.</strong> You can see exactly why a lead got 75 points instead of 50.</li>
+          <li><strong>Speed.</strong> No model training, no data pipelines. Rules evaluate in milliseconds.</li>
+          <li><strong>Control.</strong> Update scoring weights without hiring a data scientist.</li>
+        </ul>
+
+        <hr class="my-5">
+
+        <h2 class="h5 mb-3">Core Workflow</h2>
+        <ol>
+          <li><strong>Lead arrives</strong> via webhook from a form (Tally, Typeform, etc.)</li>
+          <li><strong>Fields are extracted</strong> and normalized (handles different form structures)</li>
+          <li><strong>Score is calculated</strong> based on rules (industry, company size, message content)</li>
+          <li><strong>Lead is routed</strong> to Qualified or Unqualified sheet in Google Sheets</li>
+          <li><strong>Unqualified leads get classified</strong> with tier and reason codes</li>
+        </ol>
+
+        <hr class="my-5">
+
+        <h2 class="h5 mb-3">Current Scope (v1.0)</h2>
+        <p>This version focuses on:</p>
+        <ul>
+          <li>Form ingestion via webhook</li>
+          <li>Rule-based lead scoring</li>
+          <li>Two-level classification (qualified / unqualified with tiers)</li>
+          <li>Persistent storage in Google Sheets</li>
+        </ul>
+
+      </div>
+
+      <div class="col-lg-4">
+        <div class="card p-4 sticky-top" style="top: 20px;">
+          <h5 class="mb-3">Key Metrics</h5>
+          <div class="mb-3">
+            <small class="text-muted d-block">Scoring Threshold</small>
+            <strong>80 points</strong>
+          </div>
+          <div class="mb-3">
+            <small class="text-muted d-block">Priority Tiers</small>
+            <strong>3 levels</strong> (High, Medium, Low)
+          </div>
+          <div class="mb-3">
+            <small class="text-muted d-block">Output Sheets</small>
+            <strong>2 tabs</strong> (Qualified, Unqualified)
+          </div>
+          <hr>
+          <p class="small text-muted mb-0">See <strong>Architecture</strong> page for system flow diagram.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-light border-top py-4 mt-5">
+    <div class="container-lg">
+      <small class="text-muted">Design v1.0 | Last updated: 2026-07-04</small>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/menu.js"></script>
+  <script>renderMenu('overview');</script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lead Qualification Design - v1.0</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    .hero {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 60px 0;
+    }
+    .card { border: none; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+    .badge-custom { background-color: #667eea; }
+    .link-section { text-decoration: none; color: inherit; transition: transform 0.2s; }
+    .link-section:hover { transform: translateY(-2px); }
+    .icon { width: 24px; height: 24px; display: inline-block; vertical-align: middle; margin-right: 8px; }
+    .icon-lg { width: 32px; height: 32px; }
+    .card h5 { display: flex; align-items: center; }
+    .card h5 svg { color: #667eea; margin-right: 8px; }
+  </style>
+</head>
+<body>
+  <div id="menu-container"></div>
+
+  <div class="hero">
+    <div class="container-lg">
+      <h1 class="mb-3">Lead Qualification Assistant</h1>
+      <p class="lead mb-0">Automated lead intake, scoring, and routing via n8n</p>
+    </div>
+  </div>
+
+  <div class="container-lg py-5">
+    <div class="row mb-5">
+      <div class="col-md-8">
+        <h2 class="mb-4">What This Does</h2>
+        <p>This project is an automated workflow that qualifies inbound leads. It receives form submissions, scores them based on defined rules, and routes them to appropriate storage buckets based on qualification level.</p>
+        <p>The system uses deterministic rules—not machine learning—to ensure scores are explainable and can be tuned without retraining.</p>
+      </div>
+      <div class="col-md-4">
+        <div class="card p-4">
+          <span class="badge badge-custom mb-3">v1.0</span>
+          <h5>Current Version</h5>
+          <small class="text-muted">Rule-based scoring with two-level routing</small>
+        </div>
+      </div>
+    </div>
+
+    <hr class="my-5">
+
+    <h2 class="mb-4">Navigation</h2>
+    <div class="row g-3">
+      <div class="col-md-6">
+        <a href="pages/overview.html" class="link-section">
+          <div class="card p-4">
+            <h5><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon"><path d="M3 12h18M3 6h18M3 18h18M3 12v6M21 12v6"></path></svg>Overview</h5>
+            <small class="text-muted">What is this system and why we built it</small>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-6">
+        <a href="pages/architecture.html" class="link-section">
+          <div class="card p-4">
+            <h5><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line><line x1="15" y1="3" x2="15" y2="21"></line><line x1="3" y1="9" x2="21" y2="9"></line><line x1="3" y1="15" x2="21" y2="15"></line></svg>Architecture</h5>
+            <small class="text-muted">System flow and component interactions</small>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-6">
+        <a href="pages/scoring.html" class="link-section">
+          <div class="card p-4">
+            <h5><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon"><line x1="12" y1="2" x2="12" y2="22"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>Scoring Logic</h5>
+            <small class="text-muted">How leads are scored and prioritized</small>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-6">
+        <a href="pages/routing.html" class="link-section">
+          <div class="card p-4">
+            <h5><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon"><circle cx="6" cy="12" r="1"></circle><circle cx="12" cy="12" r="1"></circle><circle cx="18" cy="12" r="1"></circle><path d="M7 12h5"></path><path d="M13 12h5"></path></svg>Routing</h5>
+            <small class="text-muted">Where qualified vs unqualified leads go</small>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-6">
+        <a href="pages/schema.html" class="link-section">
+          <div class="card p-4">
+            <h5><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon"><path d="M12 3L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-4z"></path></svg>Data Schema</h5>
+            <small class="text-muted">Output structure and fields</small>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-6">
+        <a href="pages/stack.html" class="link-section">
+          <div class="card p-4">
+            <h5><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon"><line x1="3" y1="3" x2="21" y2="3"></line><line x1="3" y1="9" x2="21" y2="9"></line><line x1="3" y1="15" x2="21" y2="15"></line><line x1="3" y1="21" x2="21" y2="21"></line></svg>Tech Stack</h5>
+            <small class="text-muted">Tools and technologies used</small>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-6">
+        <a href="pages/future.html" class="link-section">
+          <div class="card p-4">
+            <h5><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>Future Enhancements</h5>
+            <small class="text-muted">What's next for this system</small>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <hr class="my-5">
+
+    <div class="row">
+      <div class="col-md-6">
+        <h3>Quick Facts</h3>
+        <ul class="list-unstyled">
+          <li>✓ Rule-based, explainable scoring</li>
+          <li>✓ Dynamic field extraction from forms</li>
+          <li>✓ Two-tier classification system</li>
+          <li>✓ Built in n8n</li>
+          <li>✓ Uses Google Sheets for storage</li>
+        </ul>
+      </div>
+      <div class="col-md-6">
+        <h3>Known Limitations</h3>
+        <ul class="list-unstyled">
+          <li>• No learning from past outcomes</li>
+          <li>• No external enrichment APIs</li>
+          <li>• Depends on consistent form labels</li>
+          <li>• No CRM integration yet</li>
+          <li>• Rules-only (no ML component)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-light border-top py-4 mt-5">
+    <div class="container-lg">
+      <small class="text-muted">Design v1.0 | Non-AI language | Last updated: 2026-07-04</small>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/menu.js"></script>
+  <script>renderMenu();</script>
+</body>
+</html>

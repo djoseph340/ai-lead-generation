@@ -1,0 +1,460 @@
+{
+  "name": "Lead Qualification Assistant",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "lead-intake",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -64,
+        -112
+      ],
+      "id": "29b4a871-0996-4193-b8b3-d7877b04195d",
+      "name": "Webhook",
+      "webhookId": "7b32315d-c7ee-482a-8088-52313a6ed506"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "9241b1c2-2649-49a9-98aa-5994dd4e2a48",
+              "name": "Lead Name",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "a3b10d7d-cbed-497a-babc-efa1d68e4238",
+              "name": "Company",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "6ac608b8-ea31-499f-b5aa-17e2514fec2f",
+              "name": "Industry",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "7d562414-a935-459f-9d50-aaadb276e457",
+              "name": "Employees",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "4ab2b234-2566-46dc-a150-541fd5536920",
+              "name": "Email",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "b3a1bdfb-7760-4807-a493-bf149314209d",
+              "name": "Message",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        112,
+        -272
+      ],
+      "id": "07d3730f-cd1d-4141-893c-434cb55e6a92",
+      "name": "Edit Fields",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "jsCode": " const lead = $input.item.json;\n  const data = lead.body ?? lead;\n\n  // Extract fields from Tally's nested structure\n  const fields = data.data?.fields || [];\n  const fieldMap = {};\n\n  // Convert fields array into an object by label\n  fields.forEach(field => {\n    const label = field.label.toLowerCase();\n    fieldMap[label] = field.value;\n  });\n\n  let score = 0;\n\n  // Industry scoring\n  const industry = (fieldMap['industry'] || \"\").toLowerCase();\n  if (industry === \"healthcare\") {\n    score += 30;\n  }\n\n  // Company size scoring\n  const employees = Number(fieldMap['number of employees'] || 0);\n  if (employees >= 200) {\n    score += 25;\n  }\n\n  // Interest scoring\n  const message = (fieldMap['message'] || \"\").toLowerCase();\n\n  if (message.includes(\"ai\")) {\n    score += 20;\n  }\n\n  if (message.includes(\"automation\")) {\n    score += 20;\n  }\n\n  // Priority\n  let priority = \"Low\";\n\n  if (score >= 80) {\n    priority = \"High\";\n  } else if (score >= 50) {\n    priority = \"Medium\";\n  }\n\n  // Return updated item\n  const result = {\n    name: fieldMap['name'] || '',\n    company: fieldMap['company'] || '',\n    email: fieldMap['email'] || '',\n    industry: fieldMap['industry'] || '',\n    employees: fieldMap['number of employees'] || '',\n    message: fieldMap['message'] || '',\n    lead_score: score,\n    priority: priority\n  };\n\n  return { json: result };"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        320,
+        -112
+      ],
+      "id": "7331443c-8603-403e-8159-f00417d963a8",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "ace0f1a6-4360-4c7c-97ac-d4ce8c880e55",
+              "leftValue": "={{$json.lead_score}}",
+              "rightValue": 80,
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        528,
+        -112
+      ],
+      "id": "00280170-97f2-4bee-a999-0a6bbe851df4",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1U4oratzmwIgEYYK50P1HUeI4OXOMyEiryMiRizusLa0",
+          "mode": "list",
+          "cachedResultName": "Lead Qualification Results With Score",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1U4oratzmwIgEYYK50P1HUeI4OXOMyEiryMiRizusLa0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Leads",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Timestamp": "={{$now}}",
+            "Name": "={{$json.name}}",
+            "Company": "={{$json.company}}",
+            "Email": "={{ $json.email }}",
+            "Industry": "={{ $json.industry }}",
+            "Score": "={{ $json.lead_score }}",
+            "Priority": "={{ $json.priority }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Timestamp",
+              "displayName": "Timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Company",
+              "displayName": "Company",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Industry",
+              "displayName": "Industry",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Score",
+              "displayName": "Score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Priority",
+              "displayName": "Priority",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        736,
+        -192
+      ],
+      "id": "beeeb488-8f07-4f91-b845-427efd979bd9",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "mYC2Bvc4R3I8GsZg",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": " const score = Number($json.lead_score);\n\n  let tier = \"\";\n  let reason_codes = [];\n\n  // Tiering logic\n  if (score >= 60) {\n    tier = \"Tier A - Close Miss\";\n    if (score < 80) reason_codes.push(\"insufficient_score\");\n  } else if (score >= 40) {\n    tier = \"Tier B - Weak Fit\";\n    reason_codes.push(\"weak_role_fit\");\n  } else {\n    tier = \"Tier C - No Fit\";\n    reason_codes.push(\"junior_level_mismatch\");\n  }\n\n  return [\n    {\n      json: {\n        ...$json,\n        tier,\n        reason_codes: reason_codes.join(\", \")\n      }\n    }\n  ];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        160,
+        64
+      ],
+      "id": "d5233ef7-5cfe-49f6-b71f-d6c7dad15ded",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1U4oratzmwIgEYYK50P1HUeI4OXOMyEiryMiRizusLa0",
+          "mode": "list",
+          "cachedResultName": "Lead Qualification Results With Score",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1U4oratzmwIgEYYK50P1HUeI4OXOMyEiryMiRizusLa0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Unqualified",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Timestamp": "={{$now}}",
+            "Name": "={{$json.name}}",
+            "Company": "={{$json.company}}",
+            "Industry": "={{$json.industry}}",
+            "Score": "={{$json.lead_score}}",
+            "Tier": "={{$json.tier}}",
+            "Reason Codes": "={{$json.reason_codes}}",
+            "Email": "={{$json.email}}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Timestamp",
+              "displayName": "Timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Company",
+              "displayName": "Company",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Industry",
+              "displayName": "Industry",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Score",
+              "displayName": "Score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Tier",
+              "displayName": "Tier",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Reason Codes",
+              "displayName": "Reason Codes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        368,
+        64
+      ],
+      "id": "5ef5f230-f4db-4e98-bbf7-4539c16c94e3",
+      "name": "Append row in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "mYC2Bvc4R3I8GsZg",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Edit Fields": [
+      {
+        "json": {
+          "name": "Donald Smith",
+          "company": "Baylor Inc",
+          "email": "donald@baylor.com",
+          "employees": 200,
+          "industry": "Healthcare",
+          "message": "Looking for supply chain"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        []
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet1": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "d413313c-bb07-4fa1-bf5d-18acc79c079e",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "c280590892340196c10fa7a18e048fb31a3502f8913025c0bbfe86b004c6c509"
+  },
+  "nodeGroups": [],
+  "id": "HqIwY8KmHOUAalik",
+  "tags": []
+}

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech Stack - Lead Qualification Design</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { background-color: #f8f9fa; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    .card { border: none; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+    .stack-item { display: flex; align-items: center; padding: 12px; border-radius: 6px; background: white; }
+    .stack-item strong { margin-left: 12px; }
+  </style>
+</head>
+<body>
+  <div id="menu-container"></div>
+
+  <div class="container-lg py-5">
+    <h1 class="mb-4">Tech Stack</h1>
+
+    <div class="row g-4">
+      <div class="col-lg-8">
+        <h2 class="h5 mb-3">Technologies Used</h2>
+
+        <div class="row g-3 mb-4">
+          <div class="col-md-6">
+            <div class="card p-4">
+              <h6>n8n</h6>
+              <p class="small text-muted mb-2">Workflow orchestration platform. Handles webhooks, node logic, and integrations.</p>
+              <small><strong>Role:</strong> Core engine</small>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="card p-4">
+              <h6>Webhook (HTTP POST)</h6>
+              <p class="small text-muted mb-2">Entry point for form submissions from Tally, Typeform, or similar platforms.</p>
+              <small><strong>Role:</strong> Lead intake</small>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="card p-4">
+              <h6>JavaScript</h6>
+              <p class="small text-muted mb-2">Custom scoring engine and field extraction logic in n8n Code nodes.</p>
+              <small><strong>Role:</strong> Business logic</small>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="card p-4">
+              <h6>Google Sheets API</h6>
+              <p class="small text-muted mb-2">Real-time data persistence. Appends lead records to Leads and Unqualified tabs.</p>
+              <small><strong>Role:</strong> Data storage</small>
+            </div>
+          </div>
+        </div>
+
+        <hr class="my-4">
+
+        <h2 class="h5 mb-3">Architecture Overview</h2>
+
+        <div class="card p-4">
+          <div class="row text-center">
+            <div class="col-md-3 mb-3">
+              <strong style="display: block; color: #667eea;">Form</strong>
+              <small class="text-muted">Tally / Typeform</small>
+            </div>
+            <div class="col-md-3 mb-3">
+              <span>→</span>
+            </div>
+            <div class="col-md-3 mb-3">
+              <strong style="display: block; color: #667eea;">n8n</strong>
+              <small class="text-muted">Webhook → Logic</small>
+            </div>
+            <div class="col-md-3 mb-3">
+              <span>→</span>
+            </div>
+            <div class="col-md-3 mb-3">
+              <strong style="display: block; color: #667eea;">Sheets</strong>
+              <small class="text-muted">Data Store</small>
+            </div>
+          </div>
+        </div>
+
+        <hr class="my-4">
+
+        <h2 class="h5 mb-3">Why These Choices?</h2>
+
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="card p-4">
+              <h6>n8n (vs. Zapier, Make)</h6>
+              <p class="small text-muted mb-0">Open-source, self-hosted option. Full control over workflows and logic. Good for complex conditional routing.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="card p-4">
+              <h6>Google Sheets (vs. Database)</h6>
+              <p class="small text-muted mb-0">Fast to set up, non-technical users can access and filter. Good for v1. Can migrate to SQL later if needed.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="card p-4">
+              <h6>JavaScript (vs. Python)</h6>
+              <p class="small text-muted mb-0">n8n's native language for Code nodes. No external dependencies or deployments needed.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="card p-4">
+              <h6>Rule-Based (vs. ML)</h6>
+              <p class="small text-muted mb-0">Fast, interpretable, and doesn't require training data or retraining. Easy to adjust weights on the fly.</p>
+            </div>
+          </div>
+        </div>
+
+        <hr class="my-4">
+
+        <h2 class="h5 mb-3">Deployment & Hosting</h2>
+        <ul>
+          <li><strong>n8n Instance:</strong> Can be self-hosted or use n8n Cloud</li>
+          <li><strong>Google Sheets:</strong> Cloud-hosted. Requires API credentials.</li>
+          <li><strong>Webhook URL:</strong> n8n provides the endpoint for form platforms to POST to</li>
+          <li><strong>No servers to manage:</strong> Forms → n8n → Sheets (fully managed)</li>
+        </ul>
+
+        <hr class="my-4">
+
+        <h2 class="h5 mb-3">Dependencies & Configuration</h2>
+        <ul>
+          <li>n8n account (with webhook enabled)</li>
+          <li>Google Cloud project (for Sheets API access)</li>
+          <li>Google Sheets authentication (OAuth 2.0)</li>
+          <li>Form platform webhook (Tally, Typeform, etc.)</li>
+        </ul>
+
+      </div>
+
+      <div class="col-lg-4">
+        <div class="card p-4 sticky-top" style="top: 20px;">
+          <h5 class="mb-3">Quick Stack</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2"><strong>Orchestrator</strong><br><small class="text-muted">n8n</small></li>
+            <li class="mb-2"><strong>Intake</strong><br><small class="text-muted">HTTP Webhook</small></li>
+            <li class="mb-2"><strong>Logic</strong><br><small class="text-muted">JavaScript</small></li>
+            <li class="mb-2"><strong>Storage</strong><br><small class="text-muted">Google Sheets</small></li>
+          </ul>
+          <hr>
+          <h6>Setup Time</h6>
+          <p class="small text-muted mb-0">~1-2 hours. No code deployment or DevOps needed.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-light border-top py-4 mt-5">
+    <div class="container-lg">
+      <small class="text-muted">Design v1.0 | Last updated: 2026-07-04</small>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/menu.js"></script>
+  <script>renderMenu('stack');</script>
+</body>
+</html>

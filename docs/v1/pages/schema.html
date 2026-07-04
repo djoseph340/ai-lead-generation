@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Schema - Lead Qualification Design</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { background-color: #f8f9fa; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    .card { border: none; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+    .code-block { background: #f5f5f5; padding: 16px; border-radius: 6px; overflow-x: auto; font-family: 'Monaco', 'Menlo', monospace; font-size: 13px; line-height: 1.5; }
+    .field-table th { background: #f8f9fa; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div id="menu-container"></div>
+
+  <div class="container-lg py-5">
+    <h1 class="mb-4">Data Schema</h1>
+
+    <div class="row g-4">
+      <div class="col-lg-8">
+        <h2 class="h5 mb-3">Lead Output Format</h2>
+        <p>Every processed lead outputs a consistent JSON structure, regardless of input format.</p>
+
+        <hr class="my-4">
+
+        <h2 class="h5 mb-3">Example Lead Object</h2>
+        <div class="code-block">{
+  "name": "Donald Smith",
+  "company": "Baylor Inc",
+  "email": "donald@baylor.com",
+  "industry": "Healthcare",
+  "employees": 200,
+  "message": "Looking for supply chain automation",
+  "lead_score": 75,
+  "priority": "Medium",
+  "tier": "Tier B",
+  "reason_codes": "weak_role_fit",
+  "timestamp": "2026-07-04T14:23:45Z"
+}</div>
+
+        <hr class="my-4">
+
+        <h2 class="h5 mb-3">Field Definitions</h2>
+        <table class="table table-sm field-table">
+          <thead>
+            <tr>
+              <th>Field</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>name</code></td>
+              <td>string</td>
+              <td>Lead contact name from form</td>
+            </tr>
+            <tr>
+              <td><code>company</code></td>
+              <td>string</td>
+              <td>Company name</td>
+            </tr>
+            <tr>
+              <td><code>email</code></td>
+              <td>string</td>
+              <td>Lead email address</td>
+            </tr>
+            <tr>
+              <td><code>industry</code></td>
+              <td>string</td>
+              <td>Industry classification (e.g., Healthcare, Finance)</td>
+            </tr>
+            <tr>
+              <td><code>employees</code></td>
+              <td>integer</td>
+              <td>Company employee count</td>
+            </tr>
+            <tr>
+              <td><code>message</code></td>
+              <td>string</td>
+              <td>Lead's message or inquiry text</td>
+            </tr>
+            <tr>
+              <td><code>lead_score</code></td>
+              <td>integer</td>
+              <td>Calculated score (0-95)</td>
+            </tr>
+            <tr>
+              <td><code>priority</code></td>
+              <td>string</td>
+              <td>High / Medium / Low</td>
+            </tr>
+            <tr>
+              <td><code>tier</code></td>
+              <td>string</td>
+              <td>Tier A / B / C (unqualified only)</td>
+            </tr>
+            <tr>
+              <td><code>reason_codes</code></td>
+              <td>string</td>
+              <td>Why lead is unqualified (unqualified only)</td>
+            </tr>
+            <tr>
+              <td><code>timestamp</code></td>
+              <td>ISO8601</td>
+              <td>When lead was received (UTC)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <hr class="my-4">
+
+        <h2 class="h5 mb-3">Google Sheets Storage</h2>
+
+        <div class="card p-4 mb-3">
+          <h6>Sheet 1: Leads (Qualified)</h6>
+          <p class="small text-muted mb-2">High-priority leads (score ≥ 80) ready for sales outreach.</p>
+          <small class="text-muted">Columns: name, company, email, industry, employees, message, lead_score, priority, timestamp</small>
+        </div>
+
+        <div class="card p-4">
+          <h6>Sheet 2: Unqualified (Below Threshold)</h6>
+          <p class="small text-muted mb-2">Lower-priority leads (score < 80) with classification info.</p>
+          <small class="text-muted">Columns: name, company, email, industry, employees, message, lead_score, priority, tier, reason_codes, timestamp</small>
+        </div>
+
+        <hr class="my-4">
+
+        <h2 class="h5 mb-3">Reason Codes</h2>
+        <p class="small text-muted mb-3">These explain why an unqualified lead didn't make the cut:</p>
+
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="card p-3">
+              <small><strong>insufficient_score</strong></small>
+              <p class="small text-muted" style="margin-bottom: 0;">Lead's signals didn't add up to 80 points.</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card p-3">
+              <small><strong>weak_role_fit</strong></small>
+              <p class="small text-muted" style="margin-bottom: 0;">Role or title doesn't match our target personas.</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card p-3">
+              <small><strong>wrong_industry</strong></small>
+              <p class="small text-muted" style="margin-bottom: 0;">Industry not on our target list.</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card p-3">
+              <small><strong>company_size_mismatch</strong></small>
+              <p class="small text-muted" style="margin-bottom: 0;">Company too small or too large for fit.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-lg-4">
+        <div class="card p-4 sticky-top" style="top: 20px;">
+          <h5 class="mb-3">Storage Details</h5>
+          <div class="mb-3">
+            <small class="text-muted d-block">Qualified Leads</small>
+            <strong>Real-time append</strong>
+          </div>
+          <div class="mb-3">
+            <small class="text-muted d-block">Unqualified Leads</small>
+            <strong>Real-time append</strong>
+          </div>
+          <div class="mb-3">
+            <small class="text-muted d-block">Total Fields</small>
+            <strong>11 fields</strong>
+          </div>
+          <hr>
+          <h6>Score Range</h6>
+          <p class="small text-muted mb-0">Min: 0 | Max: 95 | Threshold: 80</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-light border-top py-4 mt-5">
+    <div class="container-lg">
+      <small class="text-muted">Design v1.0 | Last updated: 2026-07-04</small>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/menu.js"></script>
+  <script>renderMenu('schema');</script>
+</body>
+</html>

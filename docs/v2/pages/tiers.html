@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tier Classification - NextGenLeadGen v2</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { background-color: #f8f9fa; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    .card { border: none; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  </style>
+<link href="../assets/icons.css" rel="stylesheet">
+  </head>
+<body>
+  <div id="menu-container"></div>
+  <div class="container-lg py-5">
+    <h1 class="mb-4">5-Tier Qualification System</h1>
+    <div class="row g-4">
+      <div class="col-lg-8">
+        <h2 style="color: #333; font-weight: 600; margin-top: 40px; margin-bottom: 20px;">The 5 Tiers</h2>
+        <div class="card p-4 mb-3" style="border-left: 4px solid #ff6b6b;">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+            <svg class="icon icon-md icon-danger"><use xlink:href="../assets/icons.svg#icon-target"></use></svg>
+            <h5 style="color: #ff6b6b; margin: 0;">Tier 1: Highly Qualified (85+)</h5>
+          </div>
+          <p>Action: Immediate sales outreach. Enterprise-ready leads.</p>
+        </div>
+        <div class="card p-4 mb-3" style="border-left: 4px solid #51cf66;">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+            <svg class="icon icon-md icon-success"><use xlink:href="../assets/icons.svg#icon-check"></use></svg>
+            <h5 style="color: #51cf66; margin: 0;">Tier 2: Qualified (70-84)</h5>
+          </div>
+          <p>Action: Sales outreach within 24h. Good fit with solid signals.</p>
+        </div>
+        <div class="card p-4 mb-3" style="border-left: 4px solid #ffd43b;">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+            <svg class="icon icon-md icon-warning"><use xlink:href="../assets/icons.svg#icon-clock"></use></svg>
+            <h5 style="color: #ff9c40; margin: 0;">Tier 3: Warm Lead (50-69)</h5>
+          </div>
+          <p>Action: Nurture sequence. Potential but missing key signals.</p>
+        </div>
+        <div class="card p-4 mb-3" style="border-left: 4px solid #748ffc;">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+            <svg class="icon icon-md icon-info"><use xlink:href="../assets/icons.svg#icon-filter"></use></svg>
+            <h5 style="color: #748ffc; margin: 0;">Tier 4: Cold Lead (30-49)</h5>
+          </div>
+          <p>Action: Long-term nurture. Minimal fit.</p>
+        </div>
+        <div class="card p-4" style="border-left: 4px solid #999;">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+            <svg class="icon icon-md icon-muted"><use xlink:href="../assets/icons.svg#icon-close"></use></svg>
+            <h5 style="color: #666; margin: 0;">Tier 5: Not Qualified (0-29)</h5>
+          </div>
+          <p>Action: Archive. Does not meet criteria.</p>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card p-4 sticky-top" style="top: 20px;">
+          <h6 style="color: #667eea;">Quick Reference</h6>
+          <table style="font-size: 0.85rem; margin-bottom: 0; width: 100%;">
+            <tr style="border-bottom: 1px solid #e0e0e0;"><td><strong>Tier 1</strong></td><td>85+</td></tr>
+            <tr style="border-bottom: 1px solid #e0e0e0;"><td><strong>Tier 2</strong></td><td>70-84</td></tr>
+            <tr style="border-bottom: 1px solid #e0e0e0;"><td><strong>Tier 3</strong></td><td>50-69</td></tr>
+            <tr style="border-bottom: 1px solid #e0e0e0;"><td><strong>Tier 4</strong></td><td>30-49</td></tr>
+            <tr><td><strong>Tier 5</strong></td><td>0-29</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer style="background: #f8f9fa; border-top: 1px solid #e0e0e0; padding: 40px 0 20px; margin-top: 80px;">
+    <div class="container-lg">
+      <p style="font-size: 0.9rem; color: #666;">NextGenLeadGen v2.0 | <a href="output.html" style="color: #667eea;">Output format â†’</a></p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/menu.js"></script>
+</body>
+</html>
+

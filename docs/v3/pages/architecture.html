@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Architecture & Nodes - NextGenLeadGen v3</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/icons.css" rel="stylesheet">
+  <style>
+    body { background-color: #f8f9fa; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; }
+    .card { border: none; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+    h2 { color: #333; font-weight: 600; margin-top: 40px; margin-bottom: 20px; font-size: 1.5rem; }
+    .node-card { border-left: 3px solid #667eea; padding: 16px; margin-bottom: 12px; background: white; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <div id="menu-container"></div>
+  <div class="container-lg py-5">
+    <h1 class="mb-4">Architecture & Nodes</h1>
+
+    <div class="row g-4">
+      <div class="col-lg-8">
+        <h2>12-Node Workflow</h2>
+        <p>v3 consists of 12 specialized nodes organized into functional groups.</p>
+
+        <h2 style="margin-top: 40px;">Workflow Stages</h2>
+
+        <div class="node-card">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+            <svg class="icon icon-md icon-primary"><use xlink:href="../assets/icons.svg#icon-webhook"></use></svg>
+            <strong>1. Webhook: Lead Intake</strong>
+          </div>
+          <p style="margin: 0; color: #666;">Entry point for lead submissions with authentication</p>
+        </div>
+
+        <div class="node-card">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+            <svg class="icon icon-md icon-primary"><use xlink:href="../assets/icons.svg#icon-check"></use></svg>
+            <strong>2. Validate & Sanitize</strong>
+          </div>
+          <p style="margin: 0; color: #666;">Data validation and input sanitization</p>
+        </div>
+
+        <div class="node-card">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+            <svg class="icon icon-md icon-primary"><use xlink:href="../assets/icons.svg#icon-cloud"></use></svg>
+            <strong>3. Apollo Company Enrichment</strong>
+          </div>
+          <p style="margin: 0; color: #666;">Real-time company data enrichment via Apollo API</p>
+        </div>
+
+        <div class="node-card">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+            <svg class="icon icon-md icon-primary"><use xlink:href="../assets/icons.svg#icon-search"></use></svg>
+            <strong>4. Apify Web Scraper</strong>
+          </div>
+          <p style="margin: 0; color: #666;">Automated web research and competitive intelligence</p>
+        </div>
+
+        <div class="node-card">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+            <svg class="icon icon-md icon-primary"><use xlink:href="../assets/icons.svg#icon-brain"></use></svg>
+            <strong>5. Claude: Intent Classification</strong>
+          </div>
+          <p style="margin: 0; color: #666;">AI analysis of lead intent and urgency signals</p>
+        </div>
+
+        <div class="node-card">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+            <svg class="icon icon-md icon-primary"><use xlink:href="../assets/icons.svg#icon-layers"></use></svg>
+            <strong>6. RAG Knowledge Base Lookup</strong>
+          </div>
+          <p style="margin: 0; color: #666;">Context-aware retrieval from proprietary knowledge base</p>
+        </div>
+
+        <div class="node-card">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+            <svg class="icon icon-md icon-primary"><use xlink:href="../assets/icons.svg#icon-chart"></use></svg>
+            <strong>7. Advanced Multi-Factor Scoring</strong>
+          </div>
+          <p style="margin: 0; color: #666;">10+ weighted factors for comprehensive scoring</p>
+        </div>
+
+        <div class="node-card">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+            <svg class="icon icon-md icon-primary"><use xlink:href="../assets/icons.svg#icon-target"></use></svg>
+            <strong>8. 5-Tier Assignment</strong>
+          </div>
+          <p style="margin: 0; color: #666;">Qualification tier assignment with reasoning</p>
+        </div>
+
+        <div class="node-card">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+            <svg class="icon icon-md icon-primary"><use xlink:href="../assets/icons.svg#icon-sheet"></use></svg>
+            <strong>9. Append to Google Sheets</strong>
+          </div>
+          <p style="margin: 0; color: #666;">Store qualified leads in Google Sheets</p>
+        </div>
+
+        <div class="node-card">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+            <svg class="icon icon-md icon-primary"><use xlink:href="../assets/icons.svg#icon-settings"></use></svg>
+            <strong>10. Slack Notification</strong>
+          </div>
+          <p style="margin: 0; color: #666;">Real-time Slack alerts for high-value leads</p>
+        </div>
+
+        <div class="node-card">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+            <svg class="icon icon-md icon-primary"><use xlink:href="../assets/icons.svg#icon-database"></use></svg>
+            <strong>11. CRM Sync</strong>
+          </div>
+          <p style="margin: 0; color: #666;">Live synchronization to HubSpot/Salesforce</p>
+        </div>
+
+        <div class="node-card">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+            <svg class="icon icon-md icon-primary"><use xlink:href="../assets/icons.svg#icon-check-circle"></use></svg>
+            <strong>12. Return Success Response</strong>
+          </div>
+          <p style="margin: 0; color: #666;">Confirmation response to webhook source</p>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="card p-4 sticky-top" style="top: 20px;">
+          <h6 style="color: #667eea;">Architecture Overview</h6>
+          <ul style="list-style: none; padding: 0; font-size: 0.9rem; margin-bottom: 0;">
+            <li style="padding: 6px 0;"><strong>Total Nodes:</strong> 12</li>
+            <li style="padding: 6px 0;"><strong>AI Agents:</strong> 1 (Claude)</li>
+            <li style="padding: 6px 0;"><strong>APIs:</strong> Apollo, Apify, RAG</li>
+            <li style="padding: 6px 0;"><strong>Outputs:</strong> Sheets, Slack, CRM</li>
+            <li style="padding: 6px 0;"><strong>Processing Time:</strong> 3-5 seconds</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer style="background: #f8f9fa; border-top: 1px solid #e0e0e0; padding: 40px 0 20px; margin-top: 80px;">
+    <div class="container-lg">
+      <p style="font-size: 0.9rem; color: #666;">NextGenLeadGen v3.0 | <a href="ai-agents.html" style="color: #667eea;">AI Agents →</a></p>
+    </div>
+  </footer>
+
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <use xlink:href="../assets/icons.svg"></use>
+  </svg>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/menu.js"></script>
+</body>
+</html>

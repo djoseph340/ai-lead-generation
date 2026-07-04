@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Output & Integration - NextGenLeadGen v2</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="../assets/icons.css" rel="stylesheet">
+  </head>
+<body>
+  <div id="menu-container"></div>
+  <div class="container-lg py-5">
+    <h1 class="mb-4">Output & Integration</h1>
+    <p>Leads are output to Google Sheets with full qualification data.</p>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Lead ID</td><td>String</td><td>Unique lead identifier</td></tr>
+          <tr><td>Name</td><td>String</td><td>Contact person name</td></tr>
+          <tr><td>Email</td><td>String</td><td>Contact email address</td></tr>
+          <tr><td>Company</td><td>String</td><td>Company name</td></tr>
+          <tr><td>Score</td><td>Number 0-100</td><td>Qualification score</td></tr>
+          <tr><td>Tier</td><td>String</td><td>Tier 1-5 assignment</td></tr>
+          <tr><td>Status</td><td>String</td><td>Processing status</td></tr>
+          <tr><td>Timestamp</td><td>ISO 8601</td><td>Processing time</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <footer style="background: #f8f9fa; border-top: 1px solid #e0e0e0; padding: 40px 0 20px; margin-top: 80px;">
+    <div class="container-lg">
+      <p style="font-size: 0.9rem; color: #666;">NextGenLeadGen v2.0</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/menu.js"></script>
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <use xlink:href="../assets/icons.svg"></use>
+  </svg>
+</body>
+</html>
+
+

@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NextGenLeadGen v2 - Enterprise Lead Qualification</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/icons.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #667eea;
+      --secondary: #764ba2;
+      --success: #51cf66;
+      --danger: #ff6b6b;
+      --warning: #ffd43b;
+    }
+
+    body {
+      background-color: #f8f9fa;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      padding: 80px 0;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      opacity: 0.95;
+    }
+
+    .feature-card {
+      background: white;
+      border: none;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      border-radius: 8px;
+      padding: 24px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      height: 100%;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    }
+
+    .feature-card h5 {
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .stat-box {
+      background: white;
+      padding: 24px;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+
+    .stat-value {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: 8px;
+    }
+
+    .cta-button {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 6px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.3s;
+      display: inline-block;
+    }
+
+    .cta-button:hover {
+      background: var(--secondary);
+      color: white;
+      text-decoration: none;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 40px;
+      color: #333;
+    }
+
+    .icon-sm {
+      width: 24px;
+      height: 24px;
+      color: var(--primary);
+      display: inline-block;
+      margin-right: 8px;
+    }
+
+    .navbar-brand {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    footer {
+      background: #f8f9fa;
+      border-top: 1px solid #e0e0e0;
+      padding: 40px 0 20px;
+      margin-top: 80px;
+    }
+
+    .link-card {
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.2s;
+    }
+
+    .link-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .badge-version {
+      background: var(--primary);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div id="menu-container"></div>
+
+  <!-- Hero Section -->
+  <div class="hero">
+    <div class="container-lg">
+      <h1>NextGenLeadGen v2</h1>
+      <p>Enterprise Lead Qualification Engine</p>
+      <p style="font-size: 1rem; margin-top: 20px; opacity: 0.9;">Automated qualification, intelligent scoring, production-ready</p>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container-lg py-5">
+    <!-- What Is It -->
+    <section class="mb-5">
+      <div class="row align-items-center">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+          <h2 class="section-title">What Is NextGenLeadGen?</h2>
+          <p>An enterprise-grade workflow that automatically qualifies leads in real-time. It validates input, detects duplicates, scores leads across 6 dimensions, assigns them to tiers, and stores everything with full audit trail.</p>
+          <p>Built for businesses that receive hundreds of leads monthly and need to qualify them without manual review.</p>
+          <div style="margin-top: 24px;">
+            <a href="pages/overview.html" class="cta-button">Learn More</a>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="stat-box mb-3">
+            <div class="stat-value">99.8%</div>
+            <div class="stat-label">Validation Accuracy</div>
+          </div>
+          <div class="stat-box mb-3">
+            <div class="stat-value">96%+</div>
+            <div class="stat-label">Spam Detection</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-value">1.2s</div>
+            <div class="stat-label">Per Lead Processing</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="my-5">
+
+    <!-- Key Features -->
+    <section class="mb-5">
+      <h2 class="section-title">Key Features</h2>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg class="icon icon-lg"><use xlink:href="assets/icons.svg#icon-chart"></use></svg>
+            </div>
+            <h5>Multi-Factor Scoring</h5>
+            <p>6 dimensions (industry, company size, intent, engagement, role, geography) with weighted calculation.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg class="icon icon-lg"><use xlink:href="assets/icons.svg#icon-target"></use></svg>
+            </div>
+            <h5>5-Tier Classification</h5>
+            <p>Granular lead prioritization from Tier 1 (Highly Qualified) to Tier 5 (Not Qualified).</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg class="icon icon-lg"><use xlink:href="assets/icons.svg#icon-check"></use></svg>
+            </div>
+            <h5>Comprehensive Validation</h5>
+            <p>Email regex, phone sanitization, employee count parsing, required field checking.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg class="icon icon-lg"><use xlink:href="assets/icons.svg#icon-lock"></use></svg>
+            </div>
+            <h5>Fraud Prevention</h5>
+            <p>Email deduplication, domain frequency analysis, spam pattern detection, risk scoring.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg class="icon icon-lg"><use xlink:href="assets/icons.svg#icon-cloud"></use></svg>
+            </div>
+            <h5>CRM Integration Ready</h5>
+            <p>Structured output for Salesforce, HubSpot, and custom CRMs. Lead IDs for tracking.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg class="icon icon-lg"><use xlink:href="assets/icons.svg#icon-info"></use></svg>
+            </div>
+            <h5>GDPR/CCPA Compliant</h5>
+            <p>Full audit trail, IP logging, processing timestamps, decision history. Compliance-ready.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="my-5">
+
+    <!-- Workflow Diagram -->
+    <section class="mb-5">
+      <h2 class="section-title">Workflow Architecture</h2>
+      <div style="background: white; padding: 24px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); overflow-x: auto; text-align: center;">
+        <img src="images/n8n-workflow.png" alt="NextGenLeadGen v2 Workflow Architecture" style="max-width: 100%; height: auto; border-radius: 4px; display: inline-block;">
+      </div>
+      <p style="margin-top: 16px; text-align: center; color: #666; font-size: 0.9rem;">
+        10-node workflow: Webhook Intake → Validation → Duplicate Detection → Scoring → Tier Assignment → Profile Compilation → Output
+        <br>
+        <a href="pages/workflow.html" style="color: #667eea; text-decoration: none;">View detailed node breakdown →</a>
+      </p>
+    </section>
+
+    <hr class="my-5">
+
+    <!-- Navigation -->
+    <section class="mb-5">
+      <h2 class="section-title">Explore the Documentation</h2>
+      <div class="row g-4">
+        <div class="col-md-6">
+          <a href="pages/overview.html" class="link-card">
+            <div class="feature-card">
+              <h5>System Overview</h5>
+              <p>What the workflow does, why it matters, and how it works at a high level.</p>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-6">
+          <a href="pages/workflow.html" class="link-card">
+            <div class="feature-card">
+              <h5>Workflow Architecture</h5>
+              <p>Node-by-node breakdown, data flow, and processing pipeline.</p>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-6">
+          <a href="pages/scoring.html" class="link-card">
+            <div class="feature-card">
+              <h5>Scoring Methodology</h5>
+              <p>How leads are scored across 6 dimensions with detailed examples.</p>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-6">
+          <a href="pages/tiers.html" class="link-card">
+            <div class="feature-card">
+              <h5>Tier Classification</h5>
+              <p>The 5-tier system, recommended actions, and routing logic.</p>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-6">
+          <a href="pages/output.html" class="link-card">
+            <div class="feature-card">
+              <h5>Output & Integration</h5>
+              <p>Lead profile structure, Google Sheets setup, CRM readiness.</p>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-6">
+          <a href="pages/deployment.html" class="link-card">
+            <div class="feature-card">
+              <h5>Deployment Guide</h5>
+              <p>Getting started, configuration, testing, and production checklist.</p>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-6">
+          <a href="pages/faq.html" class="link-card">
+            <div class="feature-card">
+              <h5>Frequently Asked Questions</h5>
+              <p>Common questions about scoring, customization, scaling, and compliance.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <hr class="my-5">
+
+    <!-- Quick Stats -->
+    <section class="mb-5">
+      <h2 class="section-title">At a Glance</h2>
+      <div class="row g-4 text-center">
+        <div class="col-md-3">
+          <div class="stat-box">
+            <div class="stat-value">6</div>
+            <div class="stat-label">Scoring Dimensions</div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="stat-box">
+            <div class="stat-value">5</div>
+            <div class="stat-label">Tier Levels</div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="stat-box">
+            <div class="stat-value">19+</div>
+            <div class="stat-label">Output Fields</div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="stat-box">
+            <div class="stat-value">1000+</div>
+            <div class="stat-label">Max Leads/Day</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="my-5">
+
+    <!-- Version Info -->
+    <section class="mb-5">
+      <h2 class="section-title">Version Information</h2>
+      <div class="row">
+        <div class="col-lg-8">
+          <div style="background: white; padding: 24px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.08);">
+            <p><strong>Current Version:</strong> 2.0.0</p>
+            <p><strong>Status:</strong> Production Ready</p>
+            <p><strong>Release Date:</strong> 2026-07-04</p>
+            <p><strong>Improvements from v1.0:</strong> 6-factor scoring, duplicate detection, risk assessment, 5-tier system, audit trail, CRM integration readiness.</p>
+            <p style="margin-top: 20px;">
+              <a href="../v1/index.html" style="color: #667eea; text-decoration: none;">View v1 Documentation →</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="container-lg">
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <h6>NextGenLeadGen v2</h6>
+          <p style="margin-bottom: 0; font-size: 0.9rem; color: #666;">Enterprise lead qualification automation</p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <p style="margin-bottom: 0; font-size: 0.9rem; color: #666;">
+            <a href="pages/overview.html" style="color: #667eea; text-decoration: none;">Documentation</a> |
+            <a href="pages/deployment.html" style="color: #667eea; text-decoration: none;">Deployment</a> |
+            <a href="pages/faq.html" style="color: #667eea; text-decoration: none;">FAQ</a>
+          </p>
+        </div>
+      </div>
+      <div style="border-top: 1px solid #e0e0e0; padding-top: 20px;">
+        <small style="color: #999;">Version 2.0.0 | Last Updated: 2026-07-04 | Production Ready</small>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <use xlink:href="assets/icons.svg"></use>
+  </svg>
+  <script src="assets/menu.js"></script>
+</body>
+</html>

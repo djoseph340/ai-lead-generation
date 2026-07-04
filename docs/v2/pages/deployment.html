@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deployment Guide - NextGenLeadGen v2</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="../assets/icons.css" rel="stylesheet">
+  </head>
+<body>
+  <div id="menu-container"></div>
+  <div class="container-lg py-5">
+    <h1 class="mb-4">Deployment Guide</h1>
+
+    <h2 style="color: #333; font-weight: 600; margin-top: 40px;">Quick Start</h2>
+    <ol>
+      <li>Open your n8n instance</li>
+      <li>Click Workflows â†’ Import</li>
+      <li>Select the NextGenLeadGen.json file</li>
+      <li>Add API credentials for Google Sheets</li>
+      <li>Configure your webhook URL</li>
+      <li>Test with sample lead data</li>
+      <li>Deploy to production</li>
+    </ol>
+
+    <h2 style="color: #333; font-weight: 600; margin-top: 40px;">Configuration</h2>
+    <div class="card p-4">
+      <h5>Google Sheets Setup</h5>
+      <ul>
+        <li>Create a Google Sheet with columns: Lead ID, Name, Email, Company, Score, Tier, Status, Timestamp</li>
+        <li>Share the sheet with your n8n service account</li>
+        <li>Get the sheet ID from the URL</li>
+        <li>Add to the workflow configuration</li>
+      </ul>
+    </div>
+
+    <h2 style="color: #333; font-weight: 600; margin-top: 40px;">Testing</h2>
+    <p>Send a test webhook request:</p>
+    <pre style="background: #f5f5f5; padding: 16px; border-radius: 4px;">curl -X POST https://your-webhook-url \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "John Doe",
+    "email": "john@example.com",
+    "company": "Acme Inc",
+    "industry": "technology"
+  }'</pre>
+  </div>
+
+  <footer style="background: #f8f9fa; border-top: 1px solid #e0e0e0; padding: 40px 0 20px; margin-top: 80px;">
+    <div class="container-lg">
+      <p style="font-size: 0.9rem; color: #666;">NextGenLeadGen v2.0 | <a href="faq.html" style="color: #667eea;">FAQ â†’</a></p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/menu.js"></script>
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <use xlink:href="../assets/icons.svg"></use>
+  </svg>
+</body>
+</html>
+
+

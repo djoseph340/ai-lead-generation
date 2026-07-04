@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Overview - NextGenLeadGen v3</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { background-color: #f8f9fa; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; }
+    .card { border: none; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+    h2 { color: #333; font-weight: 600; margin-top: 40px; margin-bottom: 20px; font-size: 1.5rem; }
+    .badge-primary { background: #667eea; }
+    .highlight { background: #fff3cd; padding: 2px 6px; border-radius: 3px; }
+  </style>
+</head>
+<body>
+  <div id="menu-container"></div>
+
+  <div class="container-lg py-5">
+    <h1 class="mb-4">System Overview - NextGenLeadGen v3.0</h1>
+
+    <div class="row g-4">
+      <div class="col-lg-8">
+        <h2>What Is NextGenLeadGen v3?</h2>
+        <p>NextGenLeadGen v3 is an <span class="highlight">AI-powered, enterprise-grade lead qualification engine</span> that combines intelligent enrichment, machine learning, and third-party data sources to deliver the most comprehensive lead assessment possible.</p>
+        <p>It's the evolution of v2, adding AI agents, RAG knowledge bases, and real-time enrichment APIs to handle complex qualification scenarios at scale.</p>
+
+        <h2>Key Improvements Over v2</h2>
+        <div class="card p-4 mb-3">
+          <h5 style="color: #667eea; font-weight: 600;">🤖 AI-Powered Classification</h5>
+          <p>Instead of just rules, v3 uses Claude AI agents to understand intent, assess risk, and profile companies with human-like reasoning.</p>
+        </div>
+
+        <div class="card p-4 mb-3">
+          <h5 style="color: #667eea; font-weight: 600;">🧠 Retrieval-Augmented Generation (RAG)</h5>
+          <p>Connect your internal knowledge base—customer success stories, case studies, pricing models—to make context-aware scoring decisions.</p>
+        </div>
+
+        <div class="card p-4 mb-3">
+          <h5 style="color: #667eea; font-weight: 600;">🔗 Real-Time Enrichment APIs</h5>
+          <p>Apollo for company data, Apify for web research, Clearbit for fallback. Every lead is enriched with live external data.</p>
+        </div>
+
+        <div class="card p-4 mb-3">
+          <h5 style="color: #667eea; font-weight: 600;">📊 Advanced Scoring</h5>
+          <p>10+ factors (vs 6 in v2) including revenue estimation, growth trajectory, technology stack, and competitive intelligence.</p>
+        </div>
+
+        <div class="card p-4">
+          <h5 style="color: #667eea; font-weight: 600;">🎯 Better Insights</h5>
+          <p>Get reasoning for every score, AI-generated summaries, risk flags, and recommendations—not just a number.</p>
+        </div>
+
+        <h2>When to Use v3 vs v2</h2>
+
+        <div class="row g-3 mt-4">
+          <div class="col-md-6">
+            <div class="card p-4">
+              <h6 style="color: #51cf66; font-weight: 600;">✅ Use v3 When You Have:</h6>
+              <ul style="margin-bottom: 0; font-size: 0.95rem;">
+                <li>100+ leads per day</li>
+                <li>Enterprise customers</li>
+                <li>Complex qualification rules</li>
+                <li>Need AI-powered insights</li>
+                <li>Budget for API calls</li>
+                <li>Proprietary scoring logic</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="card p-4">
+              <h6 style="color: #ff922b; font-weight: 600;">→ Use v2 When You Have:</h6>
+              <ul style="margin-bottom: 0; font-size: 0.95rem;">
+                <li>Fewer than 100 leads/day</li>
+                <li>Simple qualification rules</li>
+                <li>Cost-sensitive deployment</li>
+                <li>Minimal API budget</li>
+                <li>Quick time-to-market</li>
+                <li>Standard scoring model</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <h2>Architecture at a Glance</h2>
+        <p style="margin-top: 20px;">v3 follows this pipeline:</p>
+        <ol style="line-height: 2; margin-top: 16px;">
+          <li><strong>Lead Arrives</strong> via webhook</li>
+          <li><strong>Initial Validation</strong> - required fields, format checks</li>
+          <li><strong>Enrichment</strong> - Apollo, Apify, Clearbit lookups (parallel)</li>
+          <li><strong>AI Classification</strong> - 3 Claude agents analyze intent, company, risk</li>
+          <li><strong>RAG Lookup</strong> - retrieve context from your knowledge base</li>
+          <li><strong>Advanced Scoring</strong> - 10+ factors with ML models</li>
+          <li><strong>Qualification</strong> - 5-tier assignment with explanation</li>
+          <li><strong>Routing</strong> - Google Sheets, HubSpot, Slack, webhooks</li>
+          <li><strong>Audit</strong> - complete decision trail for compliance</li>
+        </ol>
+
+        <h2>Real-World Impact</h2>
+        <div class="row g-3 mt-4">
+          <div class="col-md-6">
+            <div class="card p-4">
+              <p style="margin-bottom: 0;"><strong style="color: #51cf66; font-size: 1.5rem;">+40%</strong></p>
+              <p style="margin-bottom: 0; color: #666; font-size: 0.9rem;">Sales productivity vs manual review</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card p-4">
+              <p style="margin-bottom: 0;"><strong style="color: #51cf66; font-size: 1.5rem;">99.5%</strong></p>
+              <p style="margin-bottom: 0; color: #666; font-size: 0.9rem;">Accuracy with AI + enrichment</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card p-4">
+              <p style="margin-bottom: 0;"><strong style="color: #51cf66; font-size: 1.5rem;">2-3s</strong></p>
+              <p style="margin-bottom: 0; color: #666; font-size: 0.9rem;">Per-lead processing time</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card p-4">
+              <p style="margin-bottom: 0;"><strong style="color: #51cf66; font-size: 1.5rem;">8x</strong></p>
+              <p style="margin-bottom: 0; color: #666; font-size: 0.9rem;">More data points than v2</p>
+            </div>
+          </div>
+        </div>
+
+        <h2>Next Steps</h2>
+        <p style="margin-top: 20px;">To learn more:</p>
+        <ul>
+          <li><a href="architecture.html">Review the detailed architecture</a></li>
+          <li><a href="ai-agents.html">Learn about the AI agents</a></li>
+          <li><a href="enrichment.html">Set up third-party APIs</a></li>
+          <li><a href="deployment.html">Deploy to production</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="card p-4 sticky-top" style="top: 20px;">
+          <h6 style="color: #667eea; font-weight: 600;">📋 Quick Facts</h6>
+          <ul style="list-style: none; padding: 0; font-size: 0.9rem;">
+            <li style="padding: 6px 0;"><strong>Version:</strong> 3.0.0</li>
+            <li style="padding: 6px 0;"><strong>Status:</strong> Enterprise</li>
+            <li style="padding: 6px 0;"><strong>Nodes:</strong> 25+</li>
+            <li style="padding: 6px 0;"><strong>AI Agents:</strong> 3</li>
+            <li style="padding: 6px 0;"><strong>Scoring Factors:</strong> 10+</li>
+            <li style="padding: 6px 0;"><strong>Integrations:</strong> 8</li>
+            <li style="padding: 6px 0;"><strong>Setup Time:</strong> 2-4 hours</li>
+          </ul>
+
+          <hr style="margin: 16px 0;">
+
+          <h6 style="color: #667eea; font-weight: 600;">🚀 Get Started</h6>
+          <ol style="font-size: 0.9rem; margin-bottom: 0;">
+            <li>Read this page</li>
+            <li>Review architecture</li>
+            <li>Set up APIs</li>
+            <li>Deploy workflow</li>
+            <li>Test with leads</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer style="background: #f8f9fa; border-top: 1px solid #e0e0e0; padding: 40px 0 20px; margin-top: 80px;">
+    <div class="container-lg">
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <h6>NextGenLeadGen v3.0</h6>
+          <p style="margin-bottom: 0; font-size: 0.9rem; color: #666;">AI-powered enterprise lead qualification</p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <p style="margin-bottom: 0; font-size: 0.9rem; color: #666;">
+            <a href="architecture.html" style="color: #667eea; text-decoration: none;">Architecture</a> |
+            <a href="deployment.html" style="color: #667eea; text-decoration: none;">Deployment</a> |
+            <a href="faq.html" style="color: #667eea; text-decoration: none;">FAQ</a>
+          </p>
+        </div>
+      </div>
+      <div style="border-top: 1px solid #e0e0e0; padding-top: 20px;">
+        <small style="color: #999;">Version 3.0.0 | Last Updated: 2026-07-04</small>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/menu.js"></script>
+</body>
+</html>

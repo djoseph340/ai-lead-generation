@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Future Enhancements - Lead Qualification Design</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { background-color: #f8f9fa; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    .card { border: none; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+    .phase { padding: 16px; border-left: 4px solid #667eea; margin-bottom: 12px; background: white; }
+    .phase.phase-2 { border-left-color: #764ba2; }
+    .phase.phase-3 { border-left-color: #f59f00; }
+  </style>
+</head>
+<body>
+  <div id="menu-container"></div>
+
+  <div class="container-lg py-5">
+    <h1 class="mb-4">Future Enhancements</h1>
+
+    <div class="row g-4">
+      <div class="col-lg-8">
+        <h2 class="h5 mb-3">Roadmap</h2>
+        <p>v1.0 is a solid foundation. Here's what comes next as the system matures and we learn from real data.</p>
+
+        <hr class="my-4">
+
+        <h2 class="h5 mb-3">Phase 2: Enrichment & Feedback</h2>
+
+        <div class="phase">
+          <h6>Add External Data Enrichment</h6>
+          <p class="small text-muted mb-2">Integrate APIs like Clearbit or Apollo to auto-populate missing fields and validate company data.</p>
+          <p class="small">Impact: Fewer manual lookups, richer lead profiles, better scoring accuracy.</p>
+        </div>
+
+        <div class="phase">
+          <h6>Implement Feedback Loop</h6>
+          <p class="small text-muted mb-2">Track outcomes: which leads converted, which were recycled. Feed this back into scoring weights.</p>
+          <p class="small">Impact: Rules improve over time based on actual conversions, not just assumptions.</p>
+        </div>
+
+        <div class="phase">
+          <h6>CRM Integration</h6>
+          <p class="small text-muted mb-2">Push qualified leads directly to HubSpot or Salesforce instead of just Google Sheets.</p>
+          <p class="small">Impact: Sales teams work in their native CRM. Less manual data entry.</p>
+        </div>
+
+        <hr class="my-4">
+
+        <h2 class="h5 mb-3">Phase 3: AI & Machine Learning</h2>
+
+        <div class="phase phase-3">
+          <h6>LLM-Based Intent Classification</h6>
+          <p class="small text-muted mb-2">Use Claude or GPT to analyze lead messages for intent signals beyond keyword matching.</p>
+          <p class="small">Impact: More nuanced scoring. Catches intent hidden in natural language (not just keywords).</p>
+        </div>
+
+        <div class="phase phase-3">
+          <h6>Hybrid Scoring Model</h6>
+          <p class="small text-muted mb-2">Combine rule-based scoring (explainable) with ML predictions (pattern-based).</p>
+          <p class="small">Impact: Best of both worlds. Rules + data-driven signals.</p>
+        </div>
+
+        <div class="phase phase-3">
+          <h6>Predictive Conversion Modeling</h6>
+          <p class="small text-muted mb-2">Train a model on historical lead data to predict likelihood of close.</p>
+          <p class="small">Impact: Rank leads by conversion probability, not just qualification score.</p>
+        </div>
+
+        <hr class="my-4">
+
+        <h2 class="h5 mb-3">Known Limitations Today</h2>
+
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="card p-4">
+              <h6>No Learning</h6>
+              <p class="small text-muted mb-0">Rules are static. We manually adjust weights based on sales feedback, not data.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="card p-4">
+              <h6>No Enrichment</h6>
+              <p class="small text-muted mb-0">We can't validate company size or add firmographic data from external APIs.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="card p-4">
+              <h6>Keyword-Only Intent</h6>
+              <p class="small text-muted mb-0">We only look for exact keywords ("AI", "Automation"). Misses implied intent.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="card p-4">
+              <h6>Google Sheets Scaling</h6>
+              <p class="small text-muted mb-0">Works for thousands of leads. Above 100k rows, need a proper database.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="card p-4">
+              <h6>Form Structure Dependency</h6>
+              <p class="small text-muted mb-0">If form labels change, extraction breaks. Need a more robust field mapper.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="card p-4">
+              <h6>No CRM Integration</h6>
+              <p class="small text-muted mb-0">Sales teams access Google Sheets instead of working in HubSpot or Salesforce.</p>
+            </div>
+          </div>
+        </div>
+
+        <hr class="my-4">
+
+        <h2 class="h5 mb-3">When to Upgrade</h2>
+        <ul>
+          <li><strong>Phase 2 (6+ months):</strong> Once you have 1000+ leads and can measure conversion rates</li>
+          <li><strong>Phase 3 (12+ months):</strong> Once Phase 2 data shows clear patterns and feedback loop is working</li>
+        </ul>
+        <p class="small text-muted">Don't over-engineer early. Start with rules, measure outcomes, then add sophistication.</p>
+
+      </div>
+
+      <div class="col-lg-4">
+        <div class="card p-4 sticky-top" style="top: 20px;">
+          <h5 class="mb-3">Roadmap Timeline</h5>
+          <div class="mb-3">
+            <small class="text-muted d-block">Current</small>
+            <strong>v1.0 (Now)</strong><br>
+            <small class="text-muted">Rules + 2 sheets</small>
+          </div>
+          <hr>
+          <div class="mb-3">
+            <small class="text-muted d-block">Next</small>
+            <strong>v2.0</strong><br>
+            <small class="text-muted">Enrichment + feedback</small>
+          </div>
+          <hr>
+          <div>
+            <small class="text-muted d-block">Later</small>
+            <strong>v3.0</strong><br>
+            <small class="text-muted">AI + hybrid scoring</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-light border-top py-4 mt-5">
+    <div class="container-lg">
+      <small class="text-muted">Design v1.0 | Last updated: 2026-07-04</small>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/menu.js"></script>
+  <script>renderMenu('future');</script>
+</body>
+</html>

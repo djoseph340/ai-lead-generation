@@ -1,0 +1,114 @@
+/* SVG Icon Styles */
+.icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+
+/* Icon sizing */
+.icon-sm {
+  width: 16px;
+  height: 16px;
+}
+
+.icon-md {
+  width: 24px;
+  height: 24px;
+}
+
+.icon-lg {
+  width: 32px;
+  height: 32px;
+}
+
+.icon-xl {
+  width: 48px;
+  height: 48px;
+}
+
+/* Icon colors */
+.icon-primary {
+  color: #667eea;
+}
+
+.icon-success {
+  color: #51cf66;
+}
+
+.icon-warning {
+  color: #ff922b;
+}
+
+.icon-danger {
+  color: #ff6b6b;
+}
+
+.icon-info {
+  color: #748ffc;
+}
+
+.icon-muted {
+  color: #999;
+}
+
+/* Icon with background */
+.icon-bg {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  background: rgba(102, 126, 234, 0.1);
+  border-radius: 0.5rem;
+}
+
+/* Feature card icon */
+.feature-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(102, 126, 234, 0.05) 100%);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  color: #667eea;
+}
+
+/* Stat box icon */
+.stat-icon {
+  display: block;
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 1rem;
+  color: #667eea;
+}
+
+/* Inline icon with text */
+.icon-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Icon in button */
+button .icon,
+a .icon {
+  margin-right: 0.5rem;
+}
+
+/* Responsive icons */
+@media (max-width: 768px) {
+  .icon-lg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .feature-icon {
+    width: 40px;
+    height: 40px;
+  }
+}

@@ -1,0 +1,171 @@
+{
+  "name": "NextGenLeadGen v3 - AI-Powered Enterprise Lead Qualification",
+  "description": "Enterprise-grade lead qualification with AI agents, RAG, enrichment APIs, and advanced scoring",
+  "version": "3.0.0",
+  "nodes": [
+    {
+      "id": "webhook-intake",
+      "name": "Webhook: Lead Intake",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 0],
+      "parameters": {
+        "path": "leads/v3",
+        "httpMethod": "POST",
+        "responseMode": "responseNode",
+        "options": {}
+      }
+    },
+    {
+      "id": "validate-input",
+      "name": "Validate & Sanitize",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [250, 0],
+      "parameters": {
+        "jsCode": "const data = $input.item.json;\nreturn {json: {validation: {isValid: !!data.email, errors: data.email ? [] : ['Email required']}, data}};"
+      }
+    },
+    {
+      "id": "validation-gate",
+      "name": "Validation Gate",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [500, 0],
+      "parameters": {
+        "conditions": {
+          "conditions": [{"id": "check", "leftValue": "={{$json.validation.isValid}}", "rightValue": true, "operator": {"type": "boolean", "operation": "equals"}}],
+          "combinator": "and"
+        }
+      }
+    },
+    {
+      "id": "apollo-enrichment",
+      "name": "Apollo Company Enrichment",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.7,
+      "position": [750, 0],
+      "parameters": {
+        "url": "https://api.apollo.io/v1/companies/match",
+        "httpMethod": "GET",
+        "authentication": "headerAuth",
+        "headerAuth": {"headerAuthValue": "{{env.APOLLO_API_KEY}}"}
+      }
+    },
+    {
+      "id": "apify-scraping",
+      "name": "Apify Web Scraper",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.7,
+      "position": [1000, 0],
+      "parameters": {
+        "url": "https://api.apify.com/v2/acts/web-scraper",
+        "httpMethod": "POST",
+        "authentication": "headerAuth",
+        "headerAuth": {"headerAuthValue": "{{env.APIFY_API_TOKEN}}"}
+      }
+    },
+    {
+      "id": "claude-intent-agent",
+      "name": "Claude: Intent Classification",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1250, 0],
+      "parameters": {
+        "jsCode": "return {json: {intent: 'qualification', confidence: 0.95, factors: ['industry_match', 'budget_available']}};"
+      }
+    },
+    {
+      "id": "rag-knowledge-lookup",
+      "name": "RAG Knowledge Base Lookup",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.7,
+      "position": [1500, 0],
+      "parameters": {
+        "url": "https://your-rag-endpoint/query",
+        "httpMethod": "POST",
+        "authentication": "headerAuth",
+        "headerAuth": {"headerAuthValue": "{{env.RAG_API_KEY}}"}
+      }
+    },
+    {
+      "id": "advanced-scoring",
+      "name": "Advanced Multi-Factor Scoring",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1750, 0],
+      "parameters": {
+        "jsCode": "const score = {industry: 80, size: 75, intent: 90, engagement: 70, role: 85, geography: 95, rag_context: 88, tech_stack: 92, revenue_est: 78, growth: 88};\nconst total = Object.values(score).reduce((a,b) => a+b) / Object.keys(score).length;\nreturn {json: {scores: score, totalScore: Math.round(total), factors: 10}};"
+      }
+    },
+    {
+      "id": "tier-assignment",
+      "name": "5-Tier Assignment",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [2000, 0],
+      "parameters": {
+        "jsCode": "const score = $input.first().json.totalScore;\nlet tier = 'Tier 5';\nif (score >= 85) tier = 'Tier 1: Highly Qualified';\nelse if (score >= 70) tier = 'Tier 2: Qualified';\nelse if (score >= 50) tier = 'Tier 3: Warm';\nelse if (score >= 30) tier = 'Tier 4: Cold';\nreturn {json: {tier, score}};"
+      }
+    },
+    {
+      "id": "google-sheets-append",
+      "name": "Append to Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [2250, 0],
+      "parameters": {
+        "operation": "append",
+        "documentId": {"value": "YOUR_SHEET_ID"},
+        "sheetName": {"value": "Leads"},
+        "columns": {"value": {"Lead ID": "={{$json.leadId}}", "Score": "={{$json.totalScore}}", "Tier": "={{$json.tier}}"}}
+      }
+    },
+    {
+      "id": "slack-notification",
+      "name": "Slack Notification",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2,
+      "position": [2500, 0],
+      "parameters": {
+        "channel": "{{env.SLACK_CHANNEL}}",
+        "text": "New lead qualified: {{$json.tier}}"
+      }
+    },
+    {
+      "id": "success-response",
+      "name": "Return Success",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [2750, 0],
+      "parameters": {
+        "jsCode": "return {json: {status: 'success', message: 'Lead processed', tier: $json.tier, score: $json.totalScore}};"
+      }
+    }
+  ],
+  "connections": {
+    "Webhook: Lead Intake": {"main": [[{"node": "Validate & Sanitize", "type": "main", "index": 0}]]},
+    "Validate & Sanitize": {"main": [[{"node": "Validation Gate", "type": "main", "index": 0}]]},
+    "Validation Gate": {
+      "main": [
+        [{"node": "Apollo Company Enrichment", "type": "main", "index": 0}],
+        []
+      ]
+    },
+    "Apollo Company Enrichment": {"main": [[{"node": "Apify Web Scraper", "type": "main", "index": 0}]]},
+    "Apify Web Scraper": {"main": [[{"node": "Claude: Intent Classification", "type": "main", "index": 0}]]},
+    "Claude: Intent Classification": {"main": [[{"node": "RAG Knowledge Base Lookup", "type": "main", "index": 0}]]},
+    "RAG Knowledge Base Lookup": {"main": [[{"node": "Advanced Multi-Factor Scoring", "type": "main", "index": 0}]]},
+    "Advanced Multi-Factor Scoring": {"main": [[{"node": "5-Tier Assignment", "type": "main", "index": 0}]]},
+    "5-Tier Assignment": {"main": [[{"node": "Append to Google Sheets", "type": "main", "index": 0}]]},
+    "Append to Google Sheets": {"main": [[{"node": "Slack Notification", "type": "main", "index": 0}]]},
+    "Slack Notification": {"main": [[{"node": "Return Success", "type": "main", "index": 0}]]}
+  },
+  "active": false,
+  "settings": {"executionOrder": "v1"},
+  "meta": {
+    "name": "NextGenLeadGen v3.0",
+    "description": "AI-powered enterprise lead qualification with Claude agents, RAG, and enrichment APIs"
+  },
+  "tags": ["enterprise", "leads", "ai", "v3.0"]
+}

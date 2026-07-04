@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NextGen Lead Generation & Qualification Engine v3 - AI-Powered Enterprise</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #667eea;
+      --secondary: #764ba2;
+      --accent: #ff922b;
+      --success: #51cf66;
+      --danger: #ff6b6b;
+      --warning: #ffd43b;
+    }
+
+    body {
+      background-color: #f8f9fa;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      padding: 80px 0;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      opacity: 0.95;
+    }
+
+    .badge-version {
+      background: var(--accent);
+      color: white;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      display: inline-block;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    .feature-card {
+      background: white;
+      border: none;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      border-radius: 8px;
+      padding: 24px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      height: 100%;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    }
+
+    .feature-card h5 {
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .stat-box {
+      background: white;
+      padding: 24px;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+
+    .stat-value {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: 8px;
+    }
+
+    .cta-button {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 6px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.3s;
+      display: inline-block;
+      margin-top: 16px;
+    }
+
+    .cta-button:hover {
+      background: var(--secondary);
+      color: white;
+      text-decoration: none;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 40px;
+      color: #333;
+    }
+
+    .navbar-brand {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    footer {
+      background: #f8f9fa;
+      border-top: 1px solid #e0e0e0;
+      padding: 40px 0 20px;
+      margin-top: 80px;
+    }
+
+    .link-card {
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.2s;
+    }
+
+    .link-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(102,126,234,0.1) 0%, rgba(255,146,43,0.1) 100%);
+      border-left: 4px solid var(--accent);
+      padding: 24px;
+      border-radius: 8px;
+      margin: 24px 0;
+    }
+
+    .node-badge {
+      display: inline-block;
+      background: #f0f0f0;
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      margin-right: 8px;
+      margin-bottom: 8px;
+      color: #666;
+    }
+
+    .node-badge.ai {
+      background: #fff3cd;
+      color: #856404;
+    }
+
+    .node-badge.integration {
+      background: #d1ecf1;
+      color: #0c5460;
+    }
+
+    .node-badge.processing {
+      background: #d4edda;
+      color: #155724;
+    }
+  </style>
+</head>
+<body>
+  <div id="menu-container"></div>
+
+  <!-- Hero Section -->
+  <div class="hero">
+    <div class="container-lg">
+      <h1>NextGenLeadGen v3.0</h1>
+      <p><span class="badge-version">AI-POWERED ENTERPRISE</span></p>
+      <p>Advanced Lead Qualification with AI Agents, RAG, and Third-Party Enrichment</p>
+      <p style="font-size: 1rem; margin-top: 20px; opacity: 0.9;">Claude AI • RAG Knowledge Base • Apollo • Apify Integration • Production-Ready</p>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container-lg py-5">
+    <!-- What's New in V3 -->
+    <section class="mb-5">
+      <h2 class="section-title">What's New in v3.0</h2>
+
+      <div class="highlight-box">
+        <h4 style="color: var(--accent); margin-bottom: 16px;">🚀 Enterprise AI Capabilities</h4>
+        <p>v3.0 adds intelligent enrichment, AI-powered scoring, and advanced integrations designed for enterprise-scale lead qualification.</p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card">
+            <h5>🤖 AI Intent Classification</h5>
+            <p>Claude AI agent analyzes lead messages to extract intent, pain points, and urgency signals.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card">
+            <h5>🧠 RAG Knowledge Base</h5>
+            <p>Context-aware scoring using your proprietary knowledge base and customer success data.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card">
+            <h5>🔗 Apollo Integration</h5>
+            <p>Real-time company enrichment: revenue, employee count, technology stack, decision makers.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card">
+            <h5>🕷️ Apify Web Scraping</h5>
+            <p>Automated web research for competitive intelligence and company profiling.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card">
+            <h5>📊 Advanced ML Scoring</h5>
+            <p>10+ scoring factors with confidence weighting and uncertainty quantification.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card">
+            <h5>🎯 Risk Assessment</h5>
+            <p>AI-powered fraud detection, data quality scoring, and anomaly detection.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="my-5">
+
+    <!-- Workflow Diagram -->
+    <section class="mb-5">
+      <h2 class="section-title">Workflow Architecture</h2>
+      <div style="background: white; padding: 24px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); overflow-x: auto; text-align: center;">
+        <img src="images/n8n-workflow.png" alt="NextGenLeadGen v3 Complete Workflow" style="max-width: 100%; height: auto; border-radius: 4px; display: inline-block;">
+      </div>
+      <p style="margin-top: 16px; text-align: center; color: #666; font-size: 0.9rem;">
+        Complete v3 workflow: 12 specialized nodes with AI agents, enrichment APIs, RAG lookup, advanced scoring, and multi-channel output
+        <br>
+        <a href="pages/architecture.html" style="color: #667eea; text-decoration: none;">View detailed architecture →</a>
+      </p>
+    </section>
+
+    <hr class="my-5">
+
+    <!-- Core Components -->
+    <section class="mb-5">
+      <h2 class="section-title">Core Components</h2>
+
+      <div class="row g-4 mb-4">
+        <div class="col-lg-12">
+          <h4 style="color: #333; font-weight: 600; margin-bottom: 20px;">Input & Enrichment</h4>
+          <div style="background: white; padding: 20px; border-radius: 8px;">
+            <span class="node-badge integration">Webhook Intake</span>
+            <span class="node-badge processing">Validation & Sanitization</span>
+            <span class="node-badge integration">Apollo Enrichment</span>
+            <span class="node-badge integration">Apify Web Scraping</span>
+            <span class="node-badge integration">Clearbit Fallback</span>
+            <span class="node-badge processing">Data Consolidation</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-4 mb-4">
+        <div class="col-lg-12">
+          <h4 style="color: #333; font-weight: 600; margin-bottom: 20px;">AI & Intelligent Processing</h4>
+          <div style="background: white; padding: 20px; border-radius: 8px;">
+            <span class="node-badge ai">Intent Classification Agent</span>
+            <span class="node-badge ai">Company Profiling Agent</span>
+            <span class="node-badge ai">Risk Assessment Agent</span>
+            <span class="node-badge processing">RAG Knowledge Base Lookup</span>
+            <span class="node-badge processing">Duplicate Detection (Fuzzy)</span>
+            <span class="node-badge processing">Technology Stack Detection</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-4 mb-4">
+        <div class="col-lg-12">
+          <h4 style="color: #333; font-weight: 600; margin-bottom: 20px;">Scoring & Qualification</h4>
+          <div style="background: white; padding: 20px; border-radius: 8px;">
+            <span class="node-badge processing">Multi-Factor Scoring</span>
+            <span class="node-badge processing">Confidence Calculation</span>
+            <span class="node-badge processing">ML Predictions</span>
+            <span class="node-badge processing">Tier Assignment</span>
+            <span class="node-badge processing">Recommendation Engine</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-lg-12">
+          <h4 style="color: #333; font-weight: 600; margin-bottom: 20px;">Output & Integration</h4>
+          <div style="background: white; padding: 20px; border-radius: 8px;">
+            <span class="node-badge integration">Google Sheets (Append)</span>
+            <span class="node-badge integration">HubSpot Sync</span>
+            <span class="node-badge integration">Salesforce Sync</span>
+            <span class="node-badge integration">Slack Notification</span>
+            <span class="node-badge integration">Webhook Callback</span>
+            <span class="node-badge processing">Audit Logging</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="my-5">
+
+    <!-- Navigation -->
+    <section class="mb-5">
+      <h2 class="section-title">Explore the Documentation</h2>
+      <div class="row g-4">
+        <div class="col-md-6">
+          <a href="pages/overview.html" class="link-card">
+            <div class="feature-card">
+              <h5>System Overview</h5>
+              <p>What v3 does, key improvements over v2, and when to use it.</p>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-6">
+          <a href="pages/architecture.html" class="link-card">
+            <div class="feature-card">
+              <h5>Architecture & Nodes</h5>
+              <p>Detailed breakdown of all 25+ nodes and their relationships.</p>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-6">
+          <a href="pages/ai-agents.html" class="link-card">
+            <div class="feature-card">
+              <h5>AI Agents & Tools</h5>
+              <p>Intent classification, profiling, and risk assessment agents.</p>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-6">
+          <a href="pages/enrichment.html" class="link-card">
+            <div class="feature-card">
+              <h5>Enrichment APIs</h5>
+              <p>Apollo, Clearbit, and Apify integration setup and configuration.</p>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-6">
+          <a href="pages/rag.html" class="link-card">
+            <div class="feature-card">
+              <h5>RAG Implementation</h5>
+              <p>Building and deploying your knowledge base for context-aware scoring.</p>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-6">
+          <a href="pages/scoring.html" class="link-card">
+            <div class="feature-card">
+              <h5>Advanced Scoring</h5>
+              <p>10+ factors, ML predictions, confidence weighting explained.</p>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-6">
+          <a href="pages/deployment.html" class="link-card">
+            <div class="feature-card">
+              <h5>Deployment Guide</h5>
+              <p>Setup, configuration, testing, and production checklist.</p>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-6">
+          <a href="pages/faq.html" class="link-card">
+            <div class="feature-card">
+              <h5>FAQ</h5>
+              <p>Common questions about setup, customization, and troubleshooting.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <hr class="my-5">
+
+    <!-- Comparison to V2 -->
+    <section class="mb-5">
+      <h2 class="section-title">V3 vs V2 Comparison</h2>
+
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div style="background: white; padding: 24px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.08);">
+            <h5 style="color: #51cf66; font-weight: 600; margin-bottom: 16px;">✨ V3.0 Improvements</h5>
+            <ul style="list-style: none; padding: 0;">
+              <li style="padding: 8px 0;"><strong>+4 more scoring factors</strong> (10 vs 6)</li>
+              <li style="padding: 8px 0;"><strong>3 AI agents</strong> for intelligent classification</li>
+              <li style="padding: 8px 0;"><strong>RAG integration</strong> for context-aware decisions</li>
+              <li style="padding: 8px 0;"><strong>4 enrichment APIs</strong> for real-time data</li>
+              <li style="padding: 8px 0;"><strong>Advanced duplicate detection</strong> with fuzzy matching</li>
+              <li style="padding: 8px 0;"><strong>ML predictions</strong> for revenue and growth</li>
+              <li style="padding: 8px 0;"><strong>Slack notifications</strong> for real-time alerts</li>
+              <li style="padding: 8px 0;"><strong>Live CRM sync</strong> (not just ready)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div style="background: white; padding: 24px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.08);">
+            <h5 style="color: #ff922b; font-weight: 600; margin-bottom: 16px;">⚠️ Trade-Offs</h5>
+            <ul style="list-style: none; padding: 0;">
+              <li style="padding: 8px 0;">🔧 <strong>More complex setup</strong> - requires API credentials</li>
+              <li style="padding: 8px 0;">💰 <strong>Higher API costs</strong> - Apollo, Apify, Claude calls</li>
+              <li style="padding: 8px 0;">⏱️ <strong>Slower per-lead</strong> - enrichment adds latency</li>
+              <li style="padding: 8px 0;">🔐 <strong>More third-parties</strong> - data security considerations</li>
+              <li style="padding: 8px 0;">🧠 <strong>Requires maintenance</strong> - RAG KB updates</li>
+              <li style="padding: 8px 0;">📊 <strong>More monitoring needed</strong> - AI agent outputs</li>
+              <li style="padding: 8px 0;"></li>
+              <li style="padding: 8px 0;"><strong>Recommendation:</strong> Use v3 if you have enterprise volume and need AI insights</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="my-5">
+
+    <!-- Version Info -->
+    <section class="mb-5">
+      <h2 class="section-title">Version Information</h2>
+      <div class="row">
+        <div class="col-lg-8">
+          <div style="background: white; padding: 24px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.08);">
+            <p><strong>Version:</strong> 3.0.0</p>
+            <p><strong>Status:</strong> Advanced / Enterprise</p>
+            <p><strong>Release Date:</strong> 2026-07-04</p>
+            <p><strong>Workflow Nodes:</strong> 25+</p>
+            <p><strong>AI Agents:</strong> 3</p>
+            <p><strong>Third-Party Integrations:</strong> Apollo, Apify, Clearbit, Claude API, Google Sheets, HubSpot, Salesforce, Slack</p>
+            <p style="margin-top: 20px;">
+              <a href="../index.html" style="color: #667eea; text-decoration: none;">← Back to All Versions</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="container-lg">
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <h6>NextGenLeadGen v3.0</h6>
+          <p style="margin-bottom: 0; font-size: 0.9rem; color: #666;">AI-powered enterprise lead qualification</p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <p style="margin-bottom: 0; font-size: 0.9rem; color: #666;">
+            <a href="pages/overview.html" style="color: #667eea; text-decoration: none;">Documentation</a> |
+            <a href="pages/deployment.html" style="color: #667eea; text-decoration: none;">Deployment</a> |
+            <a href="pages/faq.html" style="color: #667eea; text-decoration: none;">FAQ</a> |
+            <a href="../index.html" style="color: #667eea; text-decoration: none;">All Versions</a>
+          </p>
+        </div>
+      </div>
+      <div style="border-top: 1px solid #e0e0e0; padding-top: 20px;">
+        <small style="color: #999;">Version 3.0.0 | Last Updated: 2026-07-04 | Enterprise Ready</small>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/menu.js"></script>
+</body>
+</html>

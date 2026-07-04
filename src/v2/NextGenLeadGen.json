@@ -1,0 +1,158 @@
+{
+  "name": "NextGen Lead Generation & Qualification Engine",
+  "description": "Enterprise-grade lead qualification workflow with validation, enrichment, duplicate detection, and advanced scoring",
+  "version": "2.0.0",
+  "tags": [
+    "leads",
+    "qualification",
+    "enterprise",
+    "automation",
+    "scoring",
+    "enrichment"
+  ],
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "leads/ingest",
+        "responseMode": "responseNode",
+        "options": {
+          "noDataExpression": false,
+          "allowMultipleFiles": false
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [-320, 0],
+      "id": "webhook-lead-intake",
+      "name": "Webhook: Lead Intake",
+      "webhookId": "webhook-7b32315d-c7ee-482a-8088-52313a6ed506",
+      "disabled": false
+    },
+    {
+      "parameters": {
+        "jsCode": "const lead = $input.item.json;\nconst data = lead.body ?? lead;\nconst validation = { isValid: true, errors: [], warnings: [], sanitized: {} };\nconst fields = data.data?.fields || data.fields || [];\nconst fieldMap = {};\n\nif (Array.isArray(fields)) {\n  fields.forEach(field => {\n    const label = (field.label || '').toLowerCase().trim();\n    const value = (field.value || '').toString().trim();\n    fieldMap[label] = value;\n  });\n}\n\nconst email = (fieldMap['email'] || fieldMap['email address'] || '').toLowerCase().trim();\nconst emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;\n\nif (!email) {\n  validation.errors.push('Email is required');\n  validation.isValid = false;\n} else if (!emailRegex.test(email)) {\n  validation.errors.push(`Invalid email format: ${email}`);\n  validation.isValid = false;\n}\n\nvalidation.sanitized.email = email;\n\nconst name = (fieldMap['name'] || fieldMap['first name'] || '').trim();\nif (!name || name.length < 2) {\n  validation.errors.push('Name is required');\n  validation.isValid = false;\n}\n\nvalidation.sanitized.name = name;\n\nconst company = (fieldMap['company'] || fieldMap['company name'] || '').trim();\nif (!company || company.length < 2) {\n  validation.errors.push('Company name is required');\n  validation.isValid = false;\n}\n\nvalidation.sanitized.company = company;\nvalidation.sanitized.employees = parseInt((fieldMap['employees'] || '0').replace(/[^0-9]/g, '')) || 0;\nvalidation.sanitized.industry = (fieldMap['industry'] || '').trim();\nvalidation.sanitized.phone = (fieldMap['phone'] || '').trim();\nvalidation.sanitized.message = (fieldMap['message'] || '').trim();\nvalidation.sanitized.title = (fieldMap['title'] || '').trim();\nvalidation.sanitized.website = (fieldMap['website'] || '').trim();\nvalidation.sanitized.country = (fieldMap['country'] || '').trim();\nvalidation.sanitized.source = data.source || 'webhook';\nvalidation.sanitized.receivedAt = new Date().toISOString();\n\nreturn { json: { validation, lead: validation.sanitized } };"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-120, 0],
+      "id": "node-validate-input",
+      "name": "Validate & Sanitize Input",
+      "disabled": false
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict", "version": 3 },
+          "conditions": [
+            {
+              "id": "validation-check",
+              "leftValue": "={{$json.validation.isValid}}",
+              "rightValue": true,
+              "operator": { "type": "boolean", "operation": "equals" }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [80, 0],
+      "id": "node-validation-gate",
+      "name": "Validation Gate",
+      "disabled": false
+    },
+    {
+      "parameters": {
+        "jsCode": "return { json: { status: 'error', message: 'Lead validation failed', errors: $json.validation.errors, timestamp: new Date().toISOString() }, statusCode: 400 };"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [80, 200],
+      "id": "node-error-response",
+      "name": "Return Validation Error",
+      "disabled": false
+    },
+    {
+      "parameters": {
+        "jsCode": "const lead = $json.lead;\nconst recentLeads = $input.all().slice(-100);\nconst duplicationCheck = { isDuplicate: false, duplicateOf: null, suspiciousPatterns: [], riskScore: 0 };\n\nconst emailDuplicates = recentLeads.filter(item => item.json?.lead?.email === lead.email);\nif (emailDuplicates.length > 0) {\n  duplicationCheck.isDuplicate = true;\n  duplicationCheck.duplicateOf = emailDuplicates[0].json?.lead?.name;\n  duplicationCheck.riskScore += 50;\n}\n\nreturn { json: { ...duplicationCheck, riskLevel: duplicationCheck.riskScore >= 50 ? 'high' : 'low' } };"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [280, 0],
+      "id": "node-duplicate-check",
+      "name": "Duplicate & Risk Detection",
+      "disabled": false
+    },
+    {
+      "parameters": {
+        "jsCode": "const lead = $json.lead;\nconst scoreBreakdown = { baseScore: 0, industryScore: 0, companySizeScore: 0, totalScore: 0, factors: [] };\n\nconst targetIndustries = { 'healthcare': 100, 'health': 100, 'medical': 95, 'finance': 85, 'technology': 70, 'consulting': 65 };\nscoreBreakdown.industryScore = targetIndustries[lead.industry?.toLowerCase()] || 30;\n\nconst employees = lead.employees || 0;\nif (employees >= 1000) scoreBreakdown.companySizeScore = 100;\nelse if (employees >= 500) scoreBreakdown.companySizeScore = 90;\nelse if (employees >= 200) scoreBreakdown.companySizeScore = 80;\nelse scoreBreakdown.companySizeScore = 40;\n\nscoreBreakdown.baseScore = (scoreBreakdown.industryScore * 0.5) + (scoreBreakdown.companySizeScore * 0.5);\nscoreBreakdown.totalScore = Math.round(scoreBreakdown.baseScore);\n\nreturn { json: scoreBreakdown };"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [480, 0],
+      "id": "node-advanced-scoring",
+      "name": "Advanced Multi-Factor Scoring",
+      "disabled": false
+    },
+    {
+      "parameters": {
+        "jsCode": "const score = $json.totalScore;\nconst qualification = { tier: '', status: '', priority: '' };\n\nif (score >= 80) {\n  qualification.tier = 'Tier 1 - Highly Qualified';\n  qualification.status = 'ready_for_sales';\n  qualification.priority = 'CRITICAL';\n} else if (score >= 60) {\n  qualification.tier = 'Tier 2 - Qualified';\n  qualification.status = 'sales_ready';\n  qualification.priority = 'HIGH';\n} else {\n  qualification.tier = 'Tier 3 - Warm Lead';\n  qualification.status = 'nurture';\n  qualification.priority = 'MEDIUM';\n}\n\nreturn { json: qualification };"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [680, 0],
+      "id": "node-tier-assignment",
+      "name": "Intelligent Tier & Status Assignment",
+      "disabled": false
+    },
+    {
+      "parameters": {
+        "jsCode": "const lead = $input.all()[0].json.lead;\nconst scoring = $input.all()[1].json;\nconst qualification = $input.all()[2].json;\n\nconst now = new Date();\nconst leadProfile = {\n  leadId: `LEAD-${now.getTime()}`,\n  contact: { name: lead.name, email: lead.email, phone: lead.phone, title: lead.title },\n  company: { name: lead.company, employees: lead.employees, industry: lead.industry },\n  scoring: { totalScore: scoring.totalScore, breakdown: { industry: scoring.industryScore, companySize: scoring.companySizeScore } },\n  qualification: qualification,\n  audit: { receivedAt: lead.receivedAt, processedAt: now.toISOString(), version: '2.0.0' }\n};\n\nreturn { json: leadProfile };"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [880, 0],
+      "id": "node-lead-profile",
+      "name": "Compile Lead Profile",
+      "disabled": false
+    },
+    {
+      "parameters": {
+        "jsCode": "return { json: { status: 'success', message: 'Lead processed successfully', leadId: $json.leadId, tier: $json.qualification.tier, score: $json.scoring.totalScore, timestamp: new Date().toISOString() }, statusCode: 200 };"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1280, 0],
+      "id": "node-success-response",
+      "name": "Return Success Response",
+      "disabled": false
+    }
+  ],
+  "connections": {
+    "Webhook: Lead Intake": { "main": [[{ "node": "Validate & Sanitize Input", "type": "main", "index": 0 }]] },
+    "Validate & Sanitize Input": { "main": [[{ "node": "Validation Gate", "type": "main", "index": 0 }]] },
+    "Validation Gate": {
+      "main": [
+        [{ "node": "Duplicate & Risk Detection", "type": "main", "index": 0 }],
+        [{ "node": "Return Validation Error", "type": "main", "index": 0 }]
+      ]
+    },
+    "Duplicate & Risk Detection": { "main": [[{ "node": "Advanced Multi-Factor Scoring", "type": "main", "index": 0 }]] },
+    "Advanced Multi-Factor Scoring": { "main": [[{ "node": "Intelligent Tier & Status Assignment", "type": "main", "index": 0 }]] },
+    "Intelligent Tier & Status Assignment": { "main": [[{ "node": "Compile Lead Profile", "type": "main", "index": 0 }]] },
+    "Compile Lead Profile": { "main": [[{ "node": "Return Success Response", "type": "main", "index": 0 }]] },
+    "Return Validation Error": { "main": [[]] },
+    "Return Success Response": { "main": [[]] }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1", "binaryMode": "separate", "availableInMCP": true },
+  "versionId": "NextGenLeadGen-v2-2026-07-04",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "name": "NextGen Lead Generation & Qualification Engine",
+    "description": "Enterprise-grade lead qualification with advanced scoring, validation, and enrichment"
+  },
+  "id": "NextGenLeadGen-v2",
+  "tags": ["enterprise", "leads", "qualification", "scoring", "automation", "v2.0"]
+}
